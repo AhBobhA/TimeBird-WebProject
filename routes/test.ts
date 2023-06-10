@@ -37,6 +37,25 @@ router.get('/testGenerateUser', async (req : Request, res : Response) => {
     }
 })
 
+router.post('/testVerifyUser', async (req : Request, res : Response) => {
+    try {
+        const reqUsername = req.body.username 
+        const existedUser = await collections.users?.findOne({username: reqUsername}) as User
+        if (existedUser == null) {
+            res.status(401).send('Username or password is incorrect!')
+            return
+        }
+        const reqPassword = req.body.password
+        const verifiedPassword = utils.verifyPassword(reqPassword, existedUser.hash, existedUser.salt)
+        verifiedPassword
+        ? res.status(201).send('Successfully verify user')
+        : res.status(401).send('Username or password is incorrect!')
+    } catch (error) {
+        console.log(error)
+        res.status(400).send('An error has occurred!')
+    }
+})
+
 export default router
 
 

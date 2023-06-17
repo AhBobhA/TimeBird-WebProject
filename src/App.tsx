@@ -41,12 +41,10 @@ function App() {
         </a>
      </div>
       </nav>
-    <header>  
-
+<header>  
 <div className='top_bar'>
 <h2 className='top_text'>Dashboard</h2>
 </div>
-
 <div className='profile'>
 <a href="#" target="_blank">
   <img src={profile} className="profile_logo" alt="Regis" />
@@ -56,7 +54,6 @@ function App() {
   <img src={caretdown} className="profile_caret" alt="Regis" />
   </a>
 </div>
-
 </header>
 
 <img src={banner} className="banner" alt="Banner" /><p className='text_banner1'>WELCOME BACK, JOHN!</p>
@@ -69,59 +66,106 @@ consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
 <h4>Courses</h4>
 </div>
 
+
+
 <div className='Courses1'>
-<h5>
-Advanced Web Development <br></br>
-COS30020
-<br></br>
-<div className='startdate'>
- <span className='widget_date'>Start Date</span> 
-  </div> 
-  
-  <div className='enddate'>
-    <span className='widget_date'>End Date</span>
-    </div>
-</h5>
 
+<div className='content_courses'>
+<p className='p1'>
+Advanced Web Development</p>
+<span>COS30020</span>
+<span className='result1'>Result</span>
+<div>
+  <br></br>
+ <span className='widget_start'>Start Date</span> 
+ <span className='widget_end'>End Date</span>
+<span>
+  <progress className='widget_progress' value="50" max="100"></progress>
+</span>
+<span className='progress1'>50%</span>
+</div> 
+
+<div className='widget_1'>
+<span className='widget_days'><div className='rectangle'>dd/mm/yyyy</div></span>
+<span className='widget_ends'><div className='rectangle2'>dd/mm/yyyy</div></span>
+</div>
+</div>
 
 </div>
+
 <div className='Courses2'>
-  
-<h5>
-Advanced Web Development <br></br>
-COS30020
-<br></br>
-<div className='startdate'>
- <span className='widget_date'>Start Date</span> 
-  </div> 
-  
-  <div className='enddate'>
-    <span className='widget_date'>End Date</span>
-    </div>
-</h5>
 
-  
+<div className='content_courses'>
+<p className='p1'>
+Advanced Web Development</p>
+<span>COS30020</span>
+<span className='result1'>Result</span>
+<div>
+<br></br>
+ <span className='widget_start'>Start Date</span> 
+ <span className='widget_end'>End Date</span>
+<span>
+  <progress className='widget_progress' value="50" max="100"></progress>
+</span>
+<span className='progress1'>50%</span>
+</div> 
+
+<div className='widget_1'>
+<span className='widget_days'><div className='rectangle'>dd/mm/yyyy</div></span>
+<span className='widget_ends'><div className='rectangle2'>dd/mm/yyyy</div></span>
 </div>
+</div>
+
+</div>
+
 <div className='Courses3'>
-  
-<h5>
-Advanced Web Development <br></br>
-COS30020
-<br></br>
-<div className='startdate'>Start Date</div> <div className='enddate'>End Date</div>
-</h5>
-  
-</div>
-<div className='Courses4'>
-  
-<h5>
-Advanced Web Development <br></br>
-COS30020
-<br></br>
-<div className='startdate'>Start Date</div> <div className='enddate'>End Date</div>
-</h5>
 
-  
+<div className='content_courses'>
+<p className='p1'>
+Advanced Web Development</p>
+<span>COS30020</span>
+<span className='result1'>Result</span>
+<div>
+<br></br>
+ <span className='widget_start'>Start Date</span> 
+ <span className='widget_end'>End Date</span>
+<span>
+  <progress className='widget_progress' value="50" max="100"></progress>
+</span>
+<span className='progress1'>50%</span>
+</div> 
+
+<div className='widget_1'>
+<span className='widget_days'><div className='rectangle'>dd/mm/yyyy</div></span>
+<span className='widget_ends'><div className='rectangle2'>dd/mm/yyyy</div></span>
+</div>
+</div>
+
+</div>
+
+<div className='Courses4'>
+
+<div className='content_courses'>
+<p className='p1'>
+Advanced Web Development</p>
+<span>COS30020</span>
+<span className='result1'>Result</span>
+<div>
+<br></br>
+ <span className='widget_start'>Start Date</span> 
+ <span className='widget_end'>End Date</span>
+<span>
+  <progress className='widget_progress' value="50" max="100"></progress>
+</span>
+<span className='progress1'>50%</span>
+</div> 
+
+<div className='widget_1'>
+<span className='widget_days'><div className='rectangle'>dd/mm/yyyy</div></span>
+<span className='widget_ends'><div className='rectangle2'>dd/mm/yyyy</div></span>
+</div>
+</div>
+
 </div>
 <footer>
   <div className='footer'>

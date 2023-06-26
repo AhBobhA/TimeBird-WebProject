@@ -18,6 +18,8 @@ export async function connectToDb () {
         collections.users = collection
 
         console.log(`Successfully connected to the database.\nDatabase name: ${db_name}\nCollection: ${db_collection}`)
+    } else {
+        console.log(`Missing environment variables.`)
     }
 }
 

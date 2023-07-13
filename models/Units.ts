@@ -7,6 +7,7 @@ export default class Unit {
         public description : string,
         public created_at : number,
         public updated_at : number,
+        public updated_by: string,
         public _id? : ObjectId
     ) {}
 }

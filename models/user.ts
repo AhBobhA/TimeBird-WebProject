@@ -13,8 +13,8 @@ export default class User {
         public address : string,
         public roles : string,
         public is_deleted : boolean,
-        public updated_at : string,
-        public created_at : string,
+        public updated_at : number,
+        public created_at : number,
         public updated_by : string,
         public _id?: ObjectId
     ) {}

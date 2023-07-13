@@ -2,6 +2,7 @@ import * as mongodb from 'mongodb'
 import dotenv from 'dotenv'
 
 export const collections : { users? : mongodb.Collection } = {}
+export const collections_2 : { units? : mongodb.Collection } = {}
 
 export async function connectToDb () {
     const db_uri = process.env.DB_CONN
@@ -14,8 +15,10 @@ export async function connectToDb () {
 
         const db : mongodb.Db = client.db(db_name)
         const collection : mongodb.Collection = db.collection(db_collection)
+        const collection_2: mongodb.Collection = db.collection("units")
 
         collections.users = collection
+        collections_2.units =collection_2
 
         console.log(`Successfully connected to the database.\nDatabase name: ${db_name}\nCollection: ${db_collection}`)
     } else {

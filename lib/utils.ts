@@ -4,7 +4,7 @@ import {JwtPayload, sign, verify } from 'jsonwebtoken'
 import { join } from 'path'
 import { readFileSync } from 'fs'
 import { Request, Response, NextFunction } from 'express'
-import  User from '../models/User'
+import  User from '../models/user'
 
 //Get the private and public key from files
 const pathToKey = join(__dirname, '..', 'id_rsa_priv.pem')

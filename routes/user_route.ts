@@ -2,7 +2,7 @@ import {Router, Request, Response, NextFunction}  from 'express'
 import { ObjectId } from 'mongodb'
 import { collections } from '../config/database'
 import * as utils from '../lib/utils'
-import User from '../models/User'
+import User from '../models/user'
 
 const router = Router()
 

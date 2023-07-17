@@ -1,8 +1,8 @@
 import {Router, Request, Response, NextFunction}  from 'express'
 import { ObjectId } from 'mongodb'
 import { collections } from '../config/database'
-import  User from '../models/user'
 import * as utils from '../lib/utils'
+import User from '../models/User'
 
 const router = Router()
 
@@ -106,7 +106,6 @@ router.get('/getUser', utils.AuthMiddleWare, async (req : Request, res : Respons
         res.status(200).send({success: true, username})
     }
 })
-
 
 export default router
 

@@ -1,5 +1,4 @@
 import { pbkdf2Sync, randomBytes } from 'crypto'
-import { ObjectId } from 'mongodb'
 import {JwtPayload, sign, verify } from 'jsonwebtoken'
 import { join } from 'path'
 import { readFileSync } from 'fs'
@@ -7,8 +6,8 @@ import { Request, Response, NextFunction } from 'express'
 import  User from '../models/user'
 
 //Get the private and public key from files
-const pathToKey = join(__dirname, '..', 'id_rsa_priv.pem')
-const pathToPubKey = join(__dirname, '..', 'id_rsa_pub.pem')
+const pathToKey = join(__dirname, '../../', 'id_rsa_priv.pem')
+const pathToPubKey = join(__dirname, '../../', 'id_rsa_pub.pem')
 const PRIV_KEY = readFileSync(pathToKey, 'utf8')
 const PUB_KEY = readFileSync(pathToPubKey, 'utf8')
 

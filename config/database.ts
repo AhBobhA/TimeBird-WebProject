@@ -1,23 +1,40 @@
 import * as mongodb from 'mongodb'
 import dotenv from 'dotenv'
 
-export const collections : { users? : mongodb.Collection } = {}
+export const collections : { 
+    users? : mongodb.Collection, 
+    semester? : mongodb.Collection, 
+    course? : mongodb.Collection, 
+    units? : mongodb.Collection } = {}
 
 export async function connectToDb () {
     const db_uri = process.env.DB_CONN
     const db_name = process.env.DB_NAME
-    const db_collection = process.env.DB_COLLECTION
+    const db_collection_user = process.env.DB_COLLECTION_USERS
+    const db_collection_sem = process.env.DB_COLLECTION_SEMESTER
+    const db_collection_course = process.env.DB_COLLECTION_COURSE
+    const db_collection_units = process.env.DB_COLLECTION_UNITS
 
-    if (db_uri != null && db_name != null && db_collection != null) {
+    if (db_uri != null && db_name != null 
+        && db_collection_user != null && db_collection_sem != null 
+        && db_collection_course != null && db_collection_units != null) {
+
         const client : mongodb.MongoClient = new mongodb.MongoClient(db_uri)
         await client.connect()
 
         const db : mongodb.Db = client.db(db_name)
-        const collection : mongodb.Collection = db.collection(db_collection)
+        const collection_user : mongodb.Collection = db.collection(db_collection_user)
+        const collection_sem : mongodb.Collection = db.collection(db_collection_sem)
+        const collection_course : mongodb.Collection = db.collection(db_collection_course)
+        const collection_units : mongodb.Collection = db.collection(db_collection_units)
 
-        collections.users = collection
+        collections.users = collection_user
+        collections.semester = collection_sem
+        collections.course = collection_course
+        collections.units = collection_units
 
-        console.log(`Successfully connected to the database.\nDatabase name: ${db_name}\nCollection: ${db_collection}`)
+        console.log(`Successfully connected to the database.\nDatabase name: ${db_name}
+                    \nCollections: ${db_collection_user}, ${db_collection_sem}, ${db_collection_course}, ${db_collection_units}`)
     } else {
         console.log(`Missing environment variables.`)
     }

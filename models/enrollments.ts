@@ -8,7 +8,7 @@ export default class Enrollment {
         public enrolled_date : number,
         public result : number,
         public updated_at : number,
-        public updated_by : number,
+        public updated_by : string,
         public _id? : ObjectId
     ) {}
 }

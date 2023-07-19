@@ -45,8 +45,8 @@ Description:        This end point return the current semester
                     the courses that the student registered for 
                     in that semester.
 Request content:    None
-Response content:   Student's first and last name. Current semester
-                    name. All courses' information.
+Response content:   Student's first and last name (ID: 32). 
+                    Current semester name. All courses' information.
 --------------------------------------------------------*/
 router.get('/get_current_sem_stu', async (req : Request, res : Response) => {
     const current_date = Date.now()
@@ -60,7 +60,7 @@ router.get('/get_current_sem_stu', async (req : Request, res : Response) => {
     console.log(current_student)
 
     collections.enrollments?.find(
-        {semester_id: current_sem.semester_id, student_id: "32"}
+        {semester_id: current_sem.semester_id, user_id: 32}
     ).toArray().then(data => {
         const res_data = {
             student_fn: current_student.firstname,
@@ -72,8 +72,6 @@ router.get('/get_current_sem_stu', async (req : Request, res : Response) => {
         res.status(200).send({status: "success", res_data})
     })
 }) 
-
-
 
 export default router
 

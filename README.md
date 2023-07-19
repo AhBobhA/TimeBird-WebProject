@@ -1,5 +1,4 @@
 # TimeBird-WebProject
-Education Website for TimeBird
 
 Installation:
 

@@ -11,9 +11,9 @@ export function readEnrollment(callback: any, endCallback: any){
     const newRow = new Enrollment(
       row['unit_id'],
       row['semester_id'],
-      row['student_id'],
+      parseInt((row['student_id'])),
       ed.getTime(),
-      row['result'],
+      parseInt(row['result']),
       Date.now(),
       "anh duc ha",
     )

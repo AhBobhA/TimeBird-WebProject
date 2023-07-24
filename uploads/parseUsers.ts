@@ -12,8 +12,8 @@ export function readUsers(callback: any, endCallback: any){
     const newRow = new User(
       userIdCounter,
       row['user_name'],
-      genPass['salt'],
       genPass['hash'],
+      genPass['salt'],
       row['firstname'],
       row['lastname'],
       row['dob'],

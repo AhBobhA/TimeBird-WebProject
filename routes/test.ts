@@ -101,13 +101,13 @@ router.get('/get_current_sem_stu', async (req : Request, res : Response) => {
                 units.push(record.unit_id)
             })
         }).finally(() => { //Get all courses' names associated with enrollment records of user ID 32
-            let courses : Unit[] = []
+            let courses : ShortUnit[] = []
             collections.units?.find(
                 {unit_id: {$in: units}}
             ).project(
                 { unit_id: 1, name: 1, _id: 0 }
             ).toArray().then(data => {
-                courses = data as Unit[]
+                courses = data as ShortUnit[]
             }).finally(() => { //Create a const to hold the response data
                 const res_data = {
                     courses: courses,

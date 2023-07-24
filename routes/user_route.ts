@@ -40,13 +40,13 @@ router.get('/generateTestUser', async (req : Request, res : Response) => {
     }
 }) */
 
-/*Test verify a user using cookies and JWT
+/*Test verify a user using cookies and JWT*/
 router.post('/verifyUser', async (req : Request, res : Response) => {
     try {
         const reqUsername = req.body.username 
         const existedUser = await collections.users?.findOne({username: reqUsername}) as User
         if (existedUser == null) {
-            res.status(401).send('Username or password is incorrect!')
+            res.status(401).send('Username is incorrect!')
             return
         }
 
@@ -57,13 +57,13 @@ router.post('/verifyUser', async (req : Request, res : Response) => {
             const jwt = utils.testIssueJWT(existedUser)
             res.status(200).send({status:'success', jwt})
         } else {
-            res.status(401).send('Username or password is incorrect!')
+            res.status(401).send('Password is incorrect!')
         }
     } catch (error) {
         console.log(error)
         res.status(400).send('An error has occurred!')
     }
-})*/
+})
 
 /*router.get('/issueJWT', (req : Request, res : Response, next : NextFunction) => {
     const jwt = utils.testIssueJWT("testUser")

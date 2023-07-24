@@ -3,6 +3,8 @@ import { collections } from '../config/database'
 import Semester from '../models/semester'
 import Course from '../models/courses'
 import User from '../models/user'
+import Enrollment from '../models/enrollment'
+import Unit from '../models/unit'
 
 const router = Router()
 
@@ -48,6 +50,15 @@ Request content:    None
 Response content:   Student's first and last name (ID: 32). 
                     Current semester name. All courses' information.
 --------------------------------------------------------*/
+interface ShortUnit {
+    unit_id: string;
+    name: string
+}
+
+interface ShortEnrollment {
+    unit_id: string,
+    result: string
+}
 router.get('/get_current_sem_stu', async (req : Request, res : Response) => {
     try {
         const current_date = Date.now()
@@ -58,7 +69,7 @@ router.get('/get_current_sem_stu', async (req : Request, res : Response) => {
         console.log(current_sem)
         
         const current_student = await collections.users?.findOne({user_id: 32}) as User
-        console.log(current_student)
+        //console.log(current_student)
 
         if (current_student !== null) {
             collections.enrollments?.find(
@@ -74,17 +85,40 @@ router.get('/get_current_sem_stu', async (req : Request, res : Response) => {
                 res.status(200).send({status: "success", res_data})
             })
         } 
+
         //Temporary data for demo
+        let enrollments : ShortEnrollment[] = []
+        let units : string[] = []
+
+        //Get all enrollment records for user ID 32
         collections.enrollments?.find(
             {semester_id: current_sem.semester_id, user_id: 32}
+        ).project(
+            {unit_id: 1, result: 1, _id: 0}
         ).toArray().then(data => {
-            const res_data = {
-                courses: data,
-                start_date: current_sem.start_date,
-                end_date: current_sem.end_date
-            }
-            res.status(200).send({status: "success", res_data})
+            enrollments = data as ShortEnrollment[]
+            enrollments.forEach((record) => {
+                units.push(record.unit_id)
+            })
+        }).finally(() => { //Get all courses' names associated with enrollment records of user ID 32
+            let courses : Unit[] = []
+            collections.units?.find(
+                {unit_id: {$in: units}}
+            ).project(
+                { unit_id: 1, name: 1, _id: 0 }
+            ).toArray().then(data => {
+                courses = data as Unit[]
+            }).finally(() => { //Create a const to hold the response data
+                const res_data = {
+                    courses: courses,
+                    enrollments: enrollments,
+                    start_date: current_sem.start_date,
+                    end_date: current_sem.end_date
+                }
+                res.status(200).send({status: "success", res_data})
+            })
         })
+        
     } catch (e : any) {
         console.log(e)
         res.status(502).send({status: "fail"})

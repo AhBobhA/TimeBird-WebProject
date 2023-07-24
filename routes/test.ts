@@ -49,28 +49,47 @@ Response content:   Student's first and last name (ID: 32).
                     Current semester name. All courses' information.
 --------------------------------------------------------*/
 router.get('/get_current_sem_stu', async (req : Request, res : Response) => {
-    const current_date = Date.now()
-    const current_sem = await collections.semester?.findOne({
-        start_date: {$lte: current_date}, 
-        end_date: {$gte: current_date}
-    }) as Semester
-    console.log(current_sem)
+    try {
+        const current_date = Date.now()
+        const current_sem = await collections.semester?.findOne({
+            start_date: {$lte: current_date}, 
+            end_date: {$gte: current_date}
+        }) as Semester
+        console.log(current_sem)
+        
+        const current_student = await collections.users?.findOne({user_id: 32}) as User
+        console.log(current_student)
 
-    const current_student = await collections.users?.findOne({user_id: 32}) as User
-    console.log(current_student)
-
-    collections.enrollments?.find(
-        {semester_id: current_sem.semester_id, user_id: 32}
-    ).toArray().then(data => {
-        const res_data = {
-            student_fn: current_student.firstname,
-            student_ln: current_student.lastname,
-            courses: data,
-            start_date: current_sem.start_date,
-            end_date: current_sem.end_date
-        }
-        res.status(200).send({status: "success", res_data})
-    })
+        if (current_student !== null) {
+            collections.enrollments?.find(
+                {semester_id: current_sem.semester_id, user_id: 32}
+            ).toArray().then(data => {
+                const res_data = {
+                    student_fn: current_student.firstname,
+                    student_ln: current_student.lastname,
+                    courses: data,
+                    start_date: current_sem.start_date,
+                    end_date: current_sem.end_date
+                }
+                res.status(200).send({status: "success", res_data})
+            })
+        } 
+        //Temporary data for demo
+        collections.enrollments?.find(
+            {semester_id: current_sem.semester_id, user_id: 32}
+        ).toArray().then(data => {
+            const res_data = {
+                courses: data,
+                start_date: current_sem.start_date,
+                end_date: current_sem.end_date
+            }
+            res.status(200).send({status: "success", res_data})
+        })
+    } catch (e : any) {
+        console.log(e)
+        res.status(502).send({status: "fail"})
+    }
+    
 }) 
 
 export default router

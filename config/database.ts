@@ -1,5 +1,4 @@
 import * as mongodb from 'mongodb'
-import dotenv from 'dotenv'
 
 export const collections : { 
     users? : mongodb.Collection, 

@@ -55,7 +55,8 @@ router.post('/verifyUser', async (req : Request, res : Response) => {
 
         if (verifiedPassword) {
             const jwt = utils.testIssueJWT(existedUser)
-            res.status(200).send({status:'success', jwt})
+            res.cookie('JWT_Token', jwt, { httpOnly: false })
+            res.status(200).send('JWT has been issued')
         } else {
             res.status(401).send('Password is incorrect!')
         }
@@ -105,6 +106,11 @@ router.get('/getUser', utils.AuthMiddleWare, async (req : Request, res : Respons
         const username = existedUser.username
         res.status(200).send({success: true, username})
     }
+})
+
+router.get('/testCookie', (req : Request, res : Response) => {
+    console.log(req.cookies)
+    res.send('OK')
 })
 
 export default router

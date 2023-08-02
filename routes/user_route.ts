@@ -56,7 +56,7 @@ router.post('/verifyUser', async (req : Request, res : Response) => {
         if (verifiedPassword) {
             const jwt = utils.testIssueJWT(existedUser)
             res.cookie('JWT_Token', jwt, { httpOnly: false })
-            res.status(200).send('JWT has been issued')
+            res.status(200).send({ role: existedUser.roles, username: existedUser.firstname })
         } else {
             res.status(401).send('Password is incorrect!')
         }
@@ -80,10 +80,11 @@ router.get('/issueExpiredJWT', (req : Request, res : Response, next : NextFuncti
     res.send('JWT has been issued')
 })*/
 
-/*Test the verification middleware
+//Verify JWT
 router.get('/verifyJWT', utils.AuthMiddleWare, (req : Request, res : Response, next : NextFunction) => {
-    res.status(200).send('You have been authorized.')
-}) */
+    const role = req.body.jwt.role
+    res.status(200).send({role: role, username: req.body.jwt.username})
+})
 
 /*--------------------------------------------------------
 Description:        This end point extract the cookie from 

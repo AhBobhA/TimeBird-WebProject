@@ -50,6 +50,9 @@ Output:         A JWT containing the object id, the
 export function testIssueJWT(user : User) : string {
     const payload = {
         sub: user._id,
+        user_id: user.user_id,
+        role: user.roles,
+        username: user.firstname,
         iat: Date.now(),
         exp: Date.now() + 259200000    //259200000 = 3 days
     }
